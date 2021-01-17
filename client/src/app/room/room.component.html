@@ -1,0 +1,29 @@
+<section class="section">
+  <div class="columns">
+    <div class="column"></div>
+    <div class="column is-7">
+      <p class="subtitle is-4 ml-4" style="margin: 0"><strong>Room:</strong> {{ roomName }}</p>
+      <div class="buttons is-right" style="margin: 0 10px 0 0 ">
+        <a class="button is-link" href="/login" style="margin: 0">Leave&nbsp;&nbsp;<fa-icon [icon]="faSignOutAlt"></fa-icon></a>
+      </div>
+      <hr class="my-4" style="margin: 0"/>
+      <div id="chatbox" class="container" style="padding: 20px; background-color: rgb(245, 245, 245); height: 400px; overflow-y: scroll">
+        <app-chat-message *ngFor="let chatMessage of chatMessages" [chatMessage]="chatMessage" [currentUser]="username"></app-chat-message>
+      </div>
+      <form [formGroup]="form" (ngSubmit)="sendMessage()">
+        <p class="mt-4 ml-2"><fa-icon [icon]="faUser" style="color: grey"></fa-icon>&nbsp;&nbsp;{{ username }}</p>
+        <div class="field is-grouped mt-3">
+          <div class="control is-expanded">
+            <input class="input is-primary" type="text" placeholder="Enter message..." formControlName="message">
+          </div>
+          <div class="control">
+            <button class="button is-success is-rounded" type="submit" style="padding: 12px">
+              <fa-icon [icon]="faPaperPlane"></fa-icon>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="column"></div>
+  </div>
+</section>

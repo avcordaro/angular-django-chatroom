@@ -1,0 +1,28 @@
+<div *ngIf="chatMessage.user !== currentUser">
+  <nav class="level mb-4">
+    <div class="level-item level-left">
+      <div>
+        <p class="subtitle is-6 has-text-left" style="color: grey; padding-left: 5px">
+          {{ chatMessage.timestamp }} | {{ chatMessage.user }}
+        </p>
+        <p style="background-color: rgb(219, 219, 219); border-radius: 5px; padding: 5px 10px 5px 10px; margin-top: 5px; max-width: 350px">
+          {{ chatMessage.message}}
+        </p>
+      </div>
+    </div>
+  </nav>
+</div>
+<div *ngIf="chatMessage.user === currentUser">
+  <nav class="level mb-4">
+    <div class="level-item level-right">
+      <div>
+        <p class="subtitle is-6 has-text-right" style="color: grey; padding-right: 5px">
+          {{ chatMessage.timestamp }} | {{ chatMessage.user }}
+        </p>
+        <p style="background-color: rgb(176, 224, 255); border-radius: 5px; padding: 5px 10px 5px 10px; margin-top: 5px; max-width: 350px">
+          {{ chatMessage.message}}
+        </p>
+      </div>
+    </div>
+  </nav>
+</div>
