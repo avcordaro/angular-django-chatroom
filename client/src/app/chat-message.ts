@@ -1,5 +1,5 @@
-export class ChatMessage {
-  user!: string;
-  message!: string;
-  timestamp!: string;
+export interface ChatMessage {
+  user: string;
+  message: string;
+  timestamp: string;
 }
