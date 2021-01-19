@@ -5,6 +5,8 @@ A chatroom web app that allows users to join chatrooms and message eachother. Us
 
 This web app has not been deployed but can be run locally using the instructions below.
 
+![screenshot](https://i.imgur.com/YsHsJPN.png)
+
 ## Development
 ##### Requirements:
 * Python 3.9+

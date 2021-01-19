@@ -1,6 +1,7 @@
 <section class="section">
   <div class="columns">
     <div class="column"></div>
+    
     <div class="column is-7">
       <p class="subtitle is-4 ml-4" style="margin: 0"><strong>Room:</strong> {{ roomName }}</p>
       <div class="buttons is-right" style="margin: 0 10px 0 0 ">
@@ -23,8 +24,15 @@
           </div>
         </div>
       </form>
-      <div *ngFor="let user of roomUsers">
-        {{ user }}
+     </div>
+     <div class="column is-3">
+      <div style="margin-top: 103px; min-height: 400px; padding: 10px; border-radius: 7.5px; background-color: hsl(0, 0%, 98%)"> 
+        <p class="subtitle is-5" style="margin: 0">Users</p>
+        <hr style="background-color: lightgrey; margin: 10px 0 20px 0; height: 1px"/>
+        <div *ngFor="let user of roomUsers">
+          <p *ngIf="user === username" style="word-break: break-all; margin-bottom: 3px"><fa-icon [icon]="faUser" style="color: darkgreen"></fa-icon>&nbsp;&nbsp;<strong>{{ user }}</strong></p>
+          <p *ngIf="user !== username" style="word-break: break-all; margin-bottom: 3px"><fa-icon [icon]="faUser" style="color: grey"></fa-icon>&nbsp;&nbsp;{{ user }}</p>
+        </div>
       </div>
     </div>
     <div class="column"></div>
