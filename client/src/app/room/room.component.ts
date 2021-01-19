@@ -15,6 +15,7 @@ import { webSocket } from "rxjs/webSocket";
 export class RoomComponent implements OnInit {
 
 	chatMessages: ChatMessage[] = [];
+  roomUsers: string[] = [];
 
   form = new FormGroup({
     message: new FormControl('')
@@ -32,9 +33,9 @@ export class RoomComponent implements OnInit {
   ngOnInit(): void {
   	this.username = this.route.snapshot.queryParamMap.get("user")!;
   	this.roomName = this.route.snapshot.paramMap.get("roomName")!;
-    this.ws = webSocket('ws://localhost:8000/ws/chat/' + this.roomName + '/');
+    this.ws = webSocket('ws://localhost:8000/ws/chat/' + this.roomName + '/' + this.username + '/');
     this.ws .subscribe(
-		  (msg: any) => console.log(this.handleWebSocketMessage(msg)),
+		  (msg: any) => this.handleWebSocketMessage(msg),
 		  (err: any) => console.log(err),
 		  () => console.log('Websocket connection closed.')
 		);
@@ -50,9 +51,14 @@ export class RoomComponent implements OnInit {
   }
 
   handleWebSocketMessage(msg: any): void {
-    let chatMessage = { user: msg.user, message: msg.message, timestamp: msg.timestamp }
-    this.chatMessages.push(chatMessage);
-  	let chatboxDiv = document.getElementById("chatbox")!;
-  	setTimeout(() => { chatboxDiv.scrollTop = chatboxDiv.scrollHeight; }, 50);
+    if(msg.type === "room_users") {
+      this.roomUsers = msg.users
+      console.log(this.roomUsers)
+    } else {
+      let chatMessage = { user: msg.user, message: msg.message, timestamp: msg.timestamp }
+      this.chatMessages.push(chatMessage);
+    	let chatboxDiv = document.getElementById("chatbox")!;
+    	setTimeout(() => { chatboxDiv.scrollTop = chatboxDiv.scrollHeight; }, 50);
+    }
   }
 }

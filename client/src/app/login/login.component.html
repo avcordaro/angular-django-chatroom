@@ -5,29 +5,37 @@
       <div class="container">
         <p class="title has-text-centered">Welcome to Chatroom</p>
         <p class="subtitle has-text-centered mb-6">Join a room to continue.</p>
-        <form [formGroup]="form" (ngSubmit)="handleLogin()">
-	        <div class="field">
-	          <label class="label">Username</label>
-	          <p class="control has-icons-left">
-					    <input class="input is-primary" type="text" placeholder="Enter username" formControlName="username">
-					    <span class="icon is-small is-left">
-					      <fa-icon [icon]="faUser"></fa-icon>
-					    </span>
-					  </p>
-	        </div>
-	        <div class="field">
-	          <label class="label">Room Name</label>
-	          <p class="control has-icons-left">
-					    <input  class="input is-primary" type="text" placeholder="Enter room name" formControlName="roomName">
-					    <span class="icon is-small is-left">
-					      <fa-icon [icon]="faDoorOpen"></fa-icon>
-					    </span>
-					  </p>
-	        </div>
-					<button class="button is-success is-fullwidth mt-5" type="submit">
-						Join&nbsp;<fa-icon [icon]="faSignInAlt"></fa-icon>
-					</button>
-	    	</form>
+        <form [formGroup]="form" #ngForm="ngForm" (ngSubmit)="handleLogin()">
+            <div class="field">
+              <label class="label">Username</label>
+              <p class="control has-icons-left">
+                <input class="input is-primary" type="text" placeholder="Enter username" formControlName="username">
+                <span class="icon is-small is-left">
+                  <fa-icon [icon]="faUser"></fa-icon>
+                </span>
+              </p>
+              <div *ngIf="ngForm.submitted && form.get('username')!.invalid">
+                <p *ngIf="form.get('username')!.errors!.required" class="help is-danger">Username required.</p>
+                <p *ngIf="form.get('username')!.errors!.maxlength" class="help is-danger">Username must be less than 30 characters.</p>
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Room Name</label>
+              <p class="control has-icons-left">
+                <input  class="input is-primary" type="text" placeholder="Enter room name" formControlName="roomName">
+                <span class="icon is-small is-left">
+                  <fa-icon [icon]="faDoorOpen"></fa-icon>
+                </span>
+              </p>
+              <div *ngIf="ngForm.submitted && form.get('roomName')!.invalid">
+                <p *ngIf="form.get('roomName')!.errors!.required!" class="help is-danger">Room name required.</p>
+                <p *ngIf="form.get('roomName')!.errors!.maxlength!" class="help is-danger">Room name must be less than 30 characters.</p>
+              </div>
+            </div>
+              <button class="button is-success is-fullwidth mt-5" type="submit">
+                Join&nbsp;<fa-icon [icon]="faSignInAlt"></fa-icon>
+              </button>
+            </form>
       </div>
     </div>
     <div class="column"></div>
