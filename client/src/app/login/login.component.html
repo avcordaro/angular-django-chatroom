@@ -17,6 +17,7 @@
               <div *ngIf="ngForm.submitted && form.get('username')!.invalid">
                 <p *ngIf="form.get('username')!.errors!.required" class="help is-danger">Username required.</p>
                 <p *ngIf="form.get('username')!.errors!.maxlength" class="help is-danger">Username must be less than 30 characters.</p>
+                <p *ngIf="form.get('username')!.errors!.usernameTaken" class="help is-danger">Username already taken.</p>
               </div>
             </div>
             <div class="field">
@@ -32,7 +33,7 @@
                 <p *ngIf="form.get('roomName')!.errors!.maxlength!" class="help is-danger">Room name must be less than 30 characters.</p>
               </div>
             </div>
-              <button class="button is-success is-fullwidth mt-5" type="submit">
+              <button class="button is-success is-fullwidth mt-5" type="submit" [class.is-loading]="isSubmitting">
                 Join&nbsp;<fa-icon [icon]="faSignInAlt"></fa-icon>
               </button>
             </form>

@@ -53,7 +53,6 @@ export class RoomComponent implements OnInit {
   handleWebSocketMessage(msg: any): void {
     if(msg.type === "room_users") {
       this.roomUsers = msg.users
-      console.log(this.roomUsers)
     } else {
       let chatMessage = { user: msg.user, message: msg.message, timestamp: msg.timestamp }
       this.chatMessages.push(chatMessage);
